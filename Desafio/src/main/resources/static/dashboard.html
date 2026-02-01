@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clientes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <h2>Clientes</h2>
+    <button onclick="logout()">Sair</button>
+  </div>
+
+  <button id="btnNovo" class="primary" onclick="abrirModalNovo()">Novo Cliente</button>
+
+  <table class="tabela">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CPF</th>
+		<th>CEP</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela"></tbody>
+  </table>
+
+  <!-- MODAL NOVO CLIENTE -->
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitulo">Novo Cliente</h3>
+        <button class="ghost" onclick="fecharModal()">X</button>
+      </div>
+
+      <form id="formCliente">
+		<input type="hidden" id="clienteId" value="" />
+        <div class="grid">
+          <div>
+            <label>Nome</label>
+            <input id="nome" required />
+			<small class="field-error" id="err_nome"></small>
+          </div>
+
+          <div>
+            <label>CPF</label>
+            <input id="cpf" maxlength="14" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" required />
+			<small class="field-error" id="err_cpf"></small>
+          </div>
+
+          <div>
+            <label>CEP</label>
+            <input id="cep" maxlength="9" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" required />
+			<small class="field-error" id="err_cep"></small>
+          </div>
+
+          <div>
+            <label>UF</label>
+            <input id="uf" maxlength="2" placeholder="Ex: MG" required />
+			<small class="field-error" id="err_uf"></small>
+          </div>
+
+          <div>
+            <label>Cidade</label>
+            <input id="cidade" required />
+			<small class="field-error" id="err_cidade"></small>
+          </div>
+
+          <div>
+            <label>Bairro</label>
+            <input id="bairro" required />
+			<small class="field-error" id="err_bairro"></small>
+          </div>
+
+          <div class="full">
+            <label>Logradouro</label>
+            <input id="logradouro" required />
+			<small class="field-error" id="err_logradouro"></small>
+          </div>
+
+          <div class="full">
+            <label>Complemento</label>
+            <input id="complemento" />
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Emails dinâmicos -->
+        <div class="section-header">
+          <h4>E-mails</h4>
+          <button type="button" class="secondary" onclick="addEmail()">+ Adicionar e-mail</button>
+        </div>
+        <div id="emails"></div>
+
+        <hr />
+
+        <!-- Telefones dinâmicos -->
+        <div class="section-header">
+          <h4>Telefones</h4>
+          <button type="button" class="secondary" onclick="addTelefone()">+ Adicionar telefone</button>
+        </div>
+        <div id="telefones"></div>
+		
+		<div id="msg" class="msg" style="display:none; margin-top:12px;"></div>
+		
+        <div class="actions">
+          <button type="button" onclick="fecharModal()">Cancelar</button>
+          <button type="submit" class="primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+	
+  <!-- MODAL DETALHES -->
+  <div id="modalDetalhes" class="modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Detalhes do Cliente</h3>
+        <button class="ghost" onclick="fecharModalDetalhes()">X</button>
+      </div>
+
+      <div id="detalhesBody"></div>
+
+      <div class="actions">
+        <button onclick="fecharModalDetalhes()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="clientes.js"></script>
+</body>
+</html>
